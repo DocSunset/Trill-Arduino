@@ -9,6 +9,7 @@
  */
 
 #include "Trill.h"
+#include "WireHack.h"
 
 // some implementations of Wire (e.g.: Particle OS) do not define BUFFER_LENGTH
 #ifndef BUFFER_LENGTH
@@ -111,7 +112,7 @@ int Trill::identify() {
 }
 
 /* Read the latest scan value from the sensor. Returns true on success. */
-boolean Trill::read() {
+bool Trill::read() {
 	if(CENTROID != mode_)
 		return false;
 	uint8_t loc = 0;
@@ -135,7 +136,7 @@ boolean Trill::read() {
 	}
 
 	uint8_t maxNumCentroids = MAX_TOUCH_1D_OR_2D;
-	boolean ret = true;
+	bool ret = true;
 	/* Check for read error */
 	if(loc * 2 < length) {
 		maxNumCentroids = 0;
@@ -160,7 +161,7 @@ void Trill::updateBaseline() {
 }
 
 /* Request raw data; wrappers for Wire */
-boolean Trill::requestRawData(uint8_t max_length) {
+bool Trill::requestRawData(uint8_t max_length) {
 	uint8_t length = 0;
 
 	prepareForDataRead();

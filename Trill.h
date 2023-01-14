@@ -11,12 +11,7 @@
 #ifndef TRILL_H
 #define TRILL_H
 
-#if (ARDUINO >= 100)
-#include "Arduino.h"
-#else
-#include "WProgram.h"
-#endif
-#include "Wire.h"
+#include <cstdint>
 
 #define TRILL_SPEED_ULTRA_FAST 	0
 #define TRILL_SPEED_FAST	1
@@ -168,7 +163,7 @@ class Trill : public Touches2D
 		unsigned int getNumButtons() { return 2 * (getMode() == CENTROID && TRILL_RING == deviceType());};
 
 		/* Read the latest scan value from the sensor. Returns true on success. */
-		boolean read();
+		bool read();
 
 		/* Update the baseline value on the sensor */
 		void updateBaseline();
@@ -181,7 +176,7 @@ class Trill : public Touches2D
 		/* --- Raw data handling --- */
 
 		/* Request raw data; wrappers for Wire */
-		boolean requestRawData(uint8_t max_length = 0xFF);
+		bool requestRawData(uint8_t max_length = 0xFF);
 		int rawDataAvailable();
 		int rawDataRead();
 
